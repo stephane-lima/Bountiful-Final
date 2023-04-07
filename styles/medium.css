@@ -1,0 +1,35 @@
+/* Tablet Views ******************************/
+@media only screen and (min-width: 37.5em) {
+    body {
+        font-size: 16px;
+    }
+
+    header {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .SumCoast1,
+    .SumCoast2,
+    .call,
+    .PastOrders,
+    .Weather {
+        grid-column: span 2;
+    }
+
+    #main-about {
+        margin: 0 auto;
+    }
+
+    #contact p {
+        text-align: center;
+    }
+
+    #form {
+        margin: 20px auto;
+        margin-bottom: 15px;
+    }
+
+    #form form {
+        margin-bottom: 0;
+    }
+}
