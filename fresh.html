@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This page offers users the chance to create their own drinks and it also displays the nutritional information of their choices.">
+    <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/small1.css">
     <link rel="stylesheet" href="styles/medium.css">
     <link rel="stylesheet" href="styles/large.css">
@@ -20,55 +22,50 @@
             </div>
     </header>
     <nav>
-        <a class="current" href="index.html">Home</a>
-        <a href="fresh.html">Order</a>
+        <a href="index.html">Home</a>
+        <a class="current" href="fresh.html" id="fresh-nav">Fresh</a>
         <a href="aboutus.html">About Us</a>
     </nav>
 
-    <main>
-        <main id="form">
-            <form id="SpecialDrinkForm">
-                <label class="top">First Name<span class="color">*</span><input type="text" id="firstName" name="fname" required></label>
-                <label class="top">Email<span class="color">*</span><input type="email" id="email" name="email" placeholder="someone@gmail.com" required></label>
-                <label class="top">Cell Phone Number<span class="color">*</span><input type="tel" id="phone" name="phone" required></label>
-                <div>
-                    <label class="top">Select among these available fruits:</label><br>
-    
-                    <label for="fruit1" class="top">Fruit 1:*</label>
-                     <select name="fruit1" id="fruit1" required>
-                        <option value="">Please select fruit</option>
-                    </select><br>
-                    <label for="fruit2" class="top">Fruit 2:*</label>
-                    <select name="fruit2" id="fruit2" required>            
-                        <option value="">Please select fruit</option>
-                    </select><br>
-                    <label for="fruit3" class="top">Fruit 3:*</label>
-                    <select name="fruit3" id="fruit3" required>
-                        <option value="">Please select fruit</option>
-                    </select>
-                </div><br>
+    <main id="form">
+        <h1>Our Menu</h1>
+        <h2>Here is just a few of our many fruit choices</h2>
+        <div class="fruits-gallery">
+            <div class="wrapper">
+                <img src="images/apple1.jpg" alt="Apple">
+                <img src="images/blueberry1.jpg" alt="Blueberry">
+                <img src="images/pineapple1.jpg" alt="Pineapple">
+                <img src="images/pomegranate1.jpg" alt="Pomegranate">
+            </div>
+        </div>
 
-                <!-- <div>
-                    <label class="top input-text input-text-block">Special Instructions <textarea></textarea></label>
-                </div> -->
-    
-                <!-- <div>
-                    <label for="extraNote">Special instruction (ex. Extra/Light Ice):</label><br>
-                    <textarea class="input-text input-text-block w-100" id="extraNote" name="extraNote" rows="4"
-                        cols="40"></textarea>
-    
-                </div><br> -->
-    
-                <!-- <div class="form-row mx-auto">
-                    <button type="submit" class="btn-submit" id="btn-submit" onclick="addDrink()">
-                        Submit
-                    </button>
-                </div><br> -->
+        <h1>Build your own specialty drink</h1>
+        <!-- <h2>Please Input your Order details below, we will have your fresh smoothie ready soon.</h2> -->
+        <form id="SpecialDrinkForm">
+            <label class="lbl-properties">First Name<span class="color">*</span><input type="text" id="firstName" name="fname" required></label>
+            <label class="lbl-properties">Email<span class="color">*</span><input type="email" id="email" name="email" placeholder="someone@gmail.com" required></label>
+            <label class="lbl-properties">Cell Phone Number<span class="color">*</span><input type="tel" id="phone" name="phone" required></label><br><br>
+            <div>
+                <label class="lbl-properties" id="selectFruits">Select among these available fruits:</label>
 
-                <div>
-                    <label for="extraNote" class="top">Special instruction (ex. Extra/Light Ice):</label><br>
-                    <textarea class="input-text input-text-block w-100" id="extraNote" name="extraNote" rows="4" cols="40"></textarea>
-                </div><br>
+                <label for="fruit1" class="lbl-properties">Fruit 1:<span class="color">*</span></label>
+                    <select name="fruit1" id="fruit1" required>
+                    <option value="">Please select fruit</option>
+                </select><br>
+                <label for="fruit2" class="lbl-properties">Fruit 2:<span class="color">*</span></label>
+                <select name="fruit2" id="fruit2" required>            
+                    <option value="">Please select fruit</option>
+                </select><br>
+                <label for="fruit3" class="lbl-properties">Fruit 3:<span class="color">*</span></label>
+                <select name="fruit3" id="fruit3" required>
+                    <option value="">Please select fruit</option>
+                </select>
+            </div><br><br>
+
+            <div>
+                <label for="extraNote" class="lbl-properties">Special instructions (ex. Extra/Light Ice): </label>
+                <textarea class="input-text input-text-block w-100" id="extraNote" name="extraNote" rows="4" cols="40"></textarea>
+            </div><br>
 
             <div class="form-row mx-auto">
                 <button type="submit" class="btn-submit" id="btn-submit" onclick="addDrink()">Create Drink</button>
@@ -76,13 +73,26 @@
         </form>
 
         <div class="special-drink-result-wrapper">
-            Your Order Details:<br>
+            <h1 id="orderDetails">Your Order Details:</h1>
             <div class="drink-result" id='drink-result' hidden>
+                <p>First Name: <span id="fName"></span></p>
+                <p>Email: <span id="e-mail"></span></p>
+                <p>Phone: <span id="telephone"></span></p>
+                <p>1st Fruit: <span id="firstFruit"></span></p>
+                <p>2nd Fruit: <span id="secondFruit"></span></p>
+                <p>3rd Fruit: <span id="thirdFruit"></span></p>
+                <p id="notes">Additional Note: <span id="instructions"></span></p>
+                <p>Ordered on: <span id="orderDate"></span></p><br>
+                <p id="nutrition">Drink's Nutrition Values:</p>
+                <p>Calories: <span id="calories"></span>Kcal</p>
+                <p>Carbohydrates: <span id="carbohydrates"></span>g</p>
+                <p>Protein: <span id="protein"></span>g</p>
+                <p>Fat: <span id="fat"></span>g</p>
+                <p>Sugar: <span id="sugar"></span>g</p>
             </div>
         </div>
 
-                <div id="output-area"></div>
-            </form>
+        <!-- <div id="output-area"></div> -->
     </main>
 
     <footer>
@@ -93,5 +103,6 @@
     </footer>
     <!-- <script src="scripts/fresh.js"></script> -->
     <script src="scripts/bountiful.js"></script>
+    <script src="scripts/main-scripts.js"></script>
 </body>
 </html>

@@ -1,8 +1,10 @@
-const urlAllFruit = 'https://brotherblazzard.github.io/canvas-content/fruit.json';
+const urlAllFruit = 'json/fruit.json';
 
-var allFruitInfo;
-var select1, select2, select3;
-var totalSpecialDrinks = JSON.parse(localStorage.getItem("totalDrinks"));
+let allFruitInfo;
+let select1, select2, select3;
+let totalSpecialDrinks = JSON.parse(localStorage.getItem("totalDrinks"));
+
+
 
 function init() {
     console.log("Inside init")
@@ -25,7 +27,7 @@ function handleFruitSelect(selected) {
         }).then((allfruit) => {
 
             allFruitInfo = allfruit;
-            var options = `<option value="">Please select fruit</option>`;
+            let options = `<option value="">Please select fruit</option>`;
             allfruit.forEach(fruit => {
                 options = options + ` <option value="${fruit.id}">${fruit.name}</option>`;
             });
@@ -38,7 +40,7 @@ function handleFruitSelect(selected) {
 
 function addDrink() {
 
-    var drink = {
+    let drink = {
         firstname: document.getElementById("firstName").value,
         email: document.getElementById("email").value,
         phone: document.getElementById("phone").value,
@@ -56,11 +58,11 @@ function addDrink() {
 
         console.log("Before=" + JSON.stringify(drink));
 
-        var sumCarb = 0.0;
-        var sumProt = 0.0;
-        var sumFat = 0.0;
-        var sumSuga = 0.0;
-        var sumCalo = 0.0;
+        let sumCarb = 0.0;
+        let sumProt = 0.0;
+        let sumFat = 0.0;
+        let sumSuga = 0.0;
+        let sumCalo = 0.0;
 
         allFruitInfo.forEach(fruit => {
 
@@ -115,41 +117,74 @@ function addDrink() {
 }
 
 function showResult(drinkDetail) {
-    var x = document.getElementById("drink-result");
+    let x = document.getElementById("drink-result");
+    
+    let order = document.querySelector(".special-drink-result-wrapper");
+    order.style.display = "block";
+
     //removing hidden attribute  
     x.removeAttribute("hidden");
 
     const todayDate = new Date();
+
+    const fName = document.getElementById("fName");
+    const e_mail = document.getElementById("e-mail");
+    const telephone = document.getElementById("telephone");
+    const firstFruit = document.getElementById("firstFruit");
+    const secondfruit = document.getElementById("secondFruit");
+    const thirdFruit = document.getElementById("thirdFruit");
+    const instructions = document.getElementById("instructions");
+    const orderDate = document.getElementById("orderDate");
+    const calories = document.getElementById("calories");
+    const carbohydrates = document.getElementById("carbohydrates");
+    const protein = document.getElementById("protein");
+    const fat = document.getElementById("fat");
+    const sugar = document.getElementById("sugar");
+    // const fName = document.getElementById("fName");
+
+    fName.textContent = `${drinkDetail.firstname}`;
+    e_mail.textContent = `${drinkDetail.email}`;
+    telephone.textContent = `${drinkDetail.phone}`;
+    firstFruit.textContent = `${drinkDetail.fruit1name}`;
+    secondfruit.textContent = `${drinkDetail.fruit2name}`;
+    thirdFruit.textContent = `${drinkDetail.fruit3name}`;
+    instructions.textContent = `${drinkDetail.specNote}`;
+    orderDate.textContent = `${new Date().toLocaleString()}`;
+    calories.textContent = `${drinkDetail.sumCalo}`;
+    carbohydrates.textContent = `${drinkDetail.sumCarb}`;
+    protein.textContent = `${drinkDetail.sumProt}`;
+    fat.textContent = `${drinkDetail.sumFat}`;
+    sugar.textContent = `${drinkDetail.sumSuga}`;
     //removing hidden attribute ^
-    var resultHTML = `<br> First Name : ${drinkDetail.firstname}`;
-    resultHTML += `<br> Email : ${drinkDetail.email}`;
-    resultHTML += `<br> Phone : ${drinkDetail.phone}`;
-    resultHTML += `<br> 1st Fruit selected : ${drinkDetail.fruit1name}`;
-    resultHTML += `<br> 1st Fruit selected : ${drinkDetail.fruit2name}`;
-    resultHTML += `<br> 1st Fruit selected : ${drinkDetail.fruit3name}`;
-    resultHTML += `<br> Additional Note : "${drinkDetail.specNote}"`;
+    // let resultHTML = `<p>First Name : ${drinkDetail.firstname}</p>`;
+    // resultHTML += `<p>Email : ${drinkDetail.email}</p>`;
+    // resultHTML += `<p>Phone : ${drinkDetail.phone}</p>`;
+    // resultHTML += `<p>1st Fruit selected : ${drinkDetail.fruit1name}</p>`;
+    // resultHTML += `<p>2nd Fruit selected : ${drinkDetail.fruit2name}</p>`;
+    // resultHTML += `<p>3rd Fruit selected : ${drinkDetail.fruit3name}</p>`;
+    // resultHTML += `<p>Additional Note : "${drinkDetail.specNote}"</p><br>`;
 
 
-    resultHTML += `<br> Ordered on : ${todayDate}`;
+    // resultHTML += `<p>Ordered on : ${new Date().toLocaleString()}</p>`;
 
-    resultHTML += `<br><br> Drink's Nutrition Values:`;
-    resultHTML += `<br> Calories : ${drinkDetail.sumCalo}`;
-    resultHTML += `<br> Carbohydrates : ${drinkDetail.sumCarb}`;
-    resultHTML += `<br> Protein : ${drinkDetail.sumProt}`;
-    resultHTML += `<br> Fat : ${drinkDetail.sumFat}`;
-    resultHTML += `<br> Sugar : ${drinkDetail.sumSuga}`;
+    // resultHTML += `<br><p>Drink's Nutrition Values:</p>`;
+    // resultHTML += `<p>Calories : ${drinkDetail.sumCalo}Kcal</p>`;
+    // resultHTML += `<p>Carbohydrates: ${drinkDetail.sumCarb}g</p>`;
+    // resultHTML += `<p>Protein: ${drinkDetail.sumProt}g</p>`;
+    // resultHTML += `<p>Fat: ${drinkDetail.sumFat}g</p>`;
+    // resultHTML += `<p>Sugar: ${drinkDetail.sumSuga}g</p>`;
 
     // result on html file fresh.html
 
-    resultHTML += '<br><br>';
-    x.innerHTML = resultHTML;
+    // resultHTML += '<br><br>';
+    // x.innerHTML = resultHTML;
 
 }
 
 function handleSubmit(event) {
     event.preventDefault();
 }
-var SpecialDrinkForm = document.getElementById("SpecialDrinkForm");
+let SpecialDrinkForm = document.getElementById("SpecialDrinkForm");
 SpecialDrinkForm.addEventListener('submit', handleSubmit);
 
 document.addEventListener('DOMContentLoaded', init);
